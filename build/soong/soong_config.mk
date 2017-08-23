@@ -32,3 +32,9 @@ $(call add_json_bool, 	Uses_qcom_um_4_9_family, 			$(filter true,$(TARGET_USES_Q
 $(call add_json_bool, 	Uses_qcom_um_4_14_family, 			$(filter true,$(TARGET_USES_QCOM_UM_4_14_FAMILY)))
 
 _json_contents := $(_json_contents)    },$(newline)
+
+komodo_soong:
+	$(hide) mkdir -p $(dir $@)
+	$(hide) (\
+	echo '{'; \
+	echo '') > $(SOONG_VARIABLES_TMP)
