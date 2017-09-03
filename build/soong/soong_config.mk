@@ -37,4 +37,7 @@ komodo_soong:
 	$(hide) mkdir -p $(dir $@)
 	$(hide) (\
 	echo '{'; \
+	echo '    "QTIAudioPath":  "$(call project-path-for,qcom-audio)",'; \
+	echo '    "QTIDisplayPath":  "$(call project-path-for,qcom-display)",'; \
+	echo '    "QTIMediaPath":  "$(call project-path-for,qcom-media)",';  \
 	echo '') > $(SOONG_VARIABLES_TMP)
