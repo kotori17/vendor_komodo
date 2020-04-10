@@ -1,7 +1,6 @@
 add_json_str_omitempty = $(if $(strip $(2)),$(call add_json_str, $(1), $(2)))
-add_json_val_default = $(call add_json_val, $(1), $(if $(strip $(2)), $(2), $(3)))
 
-$(eval _contents := $$(_contents)"Komodo": {$$(newline))
+_json_contents := $(_json_contents)    "Komodo":{$(newline)
 
 # See build/core/soong_config.mk for the add_json_* functions you can use here.
 $(call add_json_str_omitempty, Additional_gralloc_10_usage_bits, $(TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS))
@@ -32,4 +31,8 @@ $(call add_json_bool, 	Uses_qcom_um_4_4_family, 			$(filter true,$(TARGET_USES_Q
 $(call add_json_bool, 	Uses_qcom_um_4_9_family, 			$(filter true,$(TARGET_USES_QCOM_UM_4_9_FAMILY)))
 $(call add_json_bool, 	Uses_qcom_um_4_14_family, 			$(filter true,$(TARGET_USES_QCOM_UM_4_14_FAMILY)))
 
-$(eval _contents := $(subst $$(comma)$$(newline)__SV_END,$(newline),$$(_contents)__SV_END},$$(newline)))
+
+# This causes the build system to strip out the last comma in our nested struct, to keep the JSON valid.
+_json_contents := $(_json_contents)__SV_END
+
+_json_contents := $(_json_contents)    },$(newline)
